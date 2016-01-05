@@ -1,0 +1,59 @@
+
+.home {
+
+  .sidebar {
+    position: fixed;
+    width: 400px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #5f7d8c;
+    color: white;
+    padding: 30px;
+
+    table {
+      width: 100%;
+    }
+
+    h4 {
+      font-size: 1.5em;
+      color: #d1d2d1;
+    }
+
+    .empty {
+      font-weight: bold;
+    }
+
+    .checkbox {
+      display: inline-block;
+      border: 2px solid #8ba1ac;
+      border-radius: 5px;
+      width: 14px;
+      height: 14px;
+      margin-top: 5px;
+      margin-right: 15px;
+    }
+
+    .department {
+      color: white;
+    }
+
+    .department-sum {
+      display: inline-block;
+      background-color: #4c6470;
+      border-radius: 15px;
+      padding: 6px;
+    }
+
+    .department-hide {
+      cursor: pointer;
+      padding-left: 10px;
+    }
+
+    .position {
+      color: #d1d2d1;
+      padding-left: 30px;
+    }
+  }
+
+}
