@@ -7,6 +7,7 @@
 import React, { Component, PropTypes } from "react";
 import ReactDOM from "react-dom";
 
+import "../css/Sidebar.scss";
 import Checkbox from "./Checkbox.js";
 
 export default class Sidebar extends Component {
@@ -32,6 +33,57 @@ export default class Sidebar extends Component {
     });
   }
 
+  isAllChecked (departmentName) {
+    const checked = this.state.checked;
+    const department = this.props.initialData[departmentName];
+    let allChecked = true;
+    for (const positionName in department) {
+      if ( !checked[positionName] ) {
+        allChecked = false;
+        break;
+      }
+    }
+    return allChecked;
+  }
+
+  checkDepartment (event, departmentName) {
+    let checked = this.state.checked;
+    const department = this.props.initialData[departmentName];
+
+    if ( this.isAllChecked(departmentName) ) {
+      for (const positionName in department) {
+        checked[positionName] = false;
+      }
+    } else {
+      for (const positionName in department) {
+        checked[positionName] = true;
+      }
+    }
+
+    this.setState({
+      checked: checked
+    });
+  }
+
+  checkPosition (event, positionName) {
+    let checked = this.state.checked;
+    if (checked[positionName]) {
+      checked[positionName] = false;
+    } else {
+      checked[positionName] = true;
+    }
+    this.setState({
+      checked: checked
+    });
+  }
+
+  empty (event) {
+    event.preventDefault();
+    this.setState({
+      checked: {}
+    });
+  }
+
   render () {
     const { checked, hided } = this.state;
     const { initialData } = this.props;
@@ -45,7 +97,7 @@ export default class Sidebar extends Component {
       tbody.push(
         <tr key={ departmentName }>
           <td className="department">
-            <Checkbox />
+            <Checkbox onClick={ event => this.checkDepartment(event, departmentName) } checked={ this.isAllChecked(departmentName) } />
             { departmentName }
             <a className="department-hide" onClick={ event => this.hide(event, departmentName) }>⮟</a>
           </td>
@@ -57,7 +109,10 @@ export default class Sidebar extends Component {
           let positionValue = department[positionName];
           tbody.push(
             <tr key={ departmentName + "/" + positionName }>
-              <td className="position"><Checkbox /> { positionName }</td>
+              <td className="position">
+                <Checkbox onClick={ event => this.checkPosition(event, positionName) } checked={ checked[positionName] } />
+                { positionName }
+              </td>
               <td>{ positionValue }</td>
             </tr>
           )
@@ -70,7 +125,7 @@ export default class Sidebar extends Component {
           <thead>
             <tr>
               <td><h4>招聘职位</h4></td>
-              <td><a className="empty">清空</a></td>
+              <td><a onClick={ event => this.empty(event) } className="empty">清空</a></td>
             </tr>
           </thead>
           <tbody>

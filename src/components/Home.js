@@ -36,6 +36,8 @@ export default class Home extends Component {
       }
     };
 
+    document.title = "首页";
+
     this.setState({
       sidebarData: data
     });
