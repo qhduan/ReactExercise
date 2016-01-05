@@ -12,3 +12,5 @@
 Bug：
 
 自认为没有
+
+## 可以直接运行 public/index.html 文件查看效果
